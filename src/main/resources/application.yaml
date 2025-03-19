@@ -16,6 +16,8 @@ spring:
       enabled: on
     jpa:
       show-sql: true
+  profiles:
+    active: shop
 
 server:
   port: 4212
