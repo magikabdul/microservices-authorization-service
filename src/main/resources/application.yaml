@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: authorization-service
+  webflux:
+    base-path: "/shop"
+  datasource:
+    host: ${database-host:localhost}
+    port: ${database-port:1433}
+    database: ${database-name:dummyName}
+    username: ${database-user:dummyUser}
+    password: ${database-password:dummyPassword}
+    flyway:
+      url: ${flyway-url:localhost}
+      user: ${database-user:dummyUser}
+      password: ${database-password:dummyPassword}
+      enabled: on
+    jpa:
+      show-sql: true
+
+server:
+  port: 4212
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+  flyway:
+    enabled: false
