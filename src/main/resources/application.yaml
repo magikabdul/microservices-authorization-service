@@ -1,6 +1,8 @@
 spring:
   application:
     name: authorization-service
+  profiles:
+    active: shop
   webflux:
     base-path: "/shop"
   datasource:
@@ -9,18 +11,19 @@ spring:
     database: ${database-name:dummyName}
     username: ${database-user:dummyUser}
     password: ${database-password:dummyPassword}
-    flyway:
-      url: ${flyway-url:localhost}
-      user: ${database-user:dummyUser}
-      password: ${database-password:dummyPassword}
-      enabled: on
-    jpa:
-      show-sql: true
-  profiles:
-    active: shop
+  flyway:
+    url: ${flyway-url:localhost}
+    user: ${database-user:dummyUser}
+    password: ${database-password:dummyPassword}
+    enabled: on
+  jpa:
+    show-sql: true
 
 server:
   port: 4212
+
+jwt:
+  secret: ${tokenSecret}
 
 ---
 
