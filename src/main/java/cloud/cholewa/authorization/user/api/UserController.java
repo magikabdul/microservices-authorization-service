@@ -22,14 +22,19 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/register")
+    @PostMapping("register")
     Mono<ResponseEntity<User>> registerUser(@RequestBody final UserRegister userRegister) {
         return userService.register(userRegister)
             .map(ResponseEntity::ok);
     }
 
-    @GetMapping("login")
+    @PostMapping("login")
     Mono<ResponseEntity<Void>> login() {
         return Mono.just(ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build());
+    }
+
+    @GetMapping
+    Mono<ResponseEntity<Void>> test() {
+        return Mono.just(ResponseEntity.ok().build());
     }
 }
