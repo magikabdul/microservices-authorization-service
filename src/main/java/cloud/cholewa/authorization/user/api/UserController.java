@@ -1,6 +1,7 @@
 package cloud.cholewa.authorization.user.api;
 
 import cloud.cholewa.authorization.user.model.User;
+import cloud.cholewa.authorization.user.model.UserLogin;
 import cloud.cholewa.authorization.user.model.UserRegister;
 import cloud.cholewa.authorization.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,10 @@ public class UserController {
     }
 
     @PostMapping("login")
-    Mono<ResponseEntity<Void>> login() {
-        return Mono.just(ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build());
+    Mono<ResponseEntity<String>> login(@RequestBody final UserLogin userLogin) {
+        return userService.login(userLogin)
+            .map(ResponseEntity::ok)
+            .doOnError(throwable -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
     @GetMapping

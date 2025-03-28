@@ -2,6 +2,7 @@ package cloud.cholewa.authorization.user.service;
 
 import cloud.cholewa.authorization.user.model.Role;
 import cloud.cholewa.authorization.user.model.User;
+import cloud.cholewa.authorization.user.model.UserLogin;
 import cloud.cholewa.authorization.user.model.UserRegister;
 import cloud.cholewa.authorization.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +34,17 @@ public class UserService {
             .flatMap(userExists -> Mono.error(new RuntimeException("User already exists")))
             .switchIfEmpty(userRepository.save(user))
             .then(Mono.just(user));
+    }
+
+    public Mono<String> login(final UserLogin userLogin) {
+        return userRepository.findByUsername(userLogin.getUsername())
+            .flatMap(user -> {
+                    log.info("db_user: {}", user.getPassword());
+                    log.info("provided_user: {}", passwordEncoder.encode(userLogin.getPassword()));
+                    return passwordEncoder.matches(userLogin.getPassword(), user.getPassword())
+                        ? Mono.just(jwtService.generateToken(user.getUsername()))
+                        : Mono.empty();
+                }
+            ).switchIfEmpty(Mono.error(new RuntimeException("Invalid username or password")));
     }
 }
