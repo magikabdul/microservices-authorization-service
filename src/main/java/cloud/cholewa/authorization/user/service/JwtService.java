@@ -18,19 +18,18 @@ public class JwtService {
     private final TokenConfiguration tokenConfiguration;
 
     public void validateToken(final String token) {
-        Jwts.parser().decryptWith(
-                Keys.hmacShaKeyFor(
-                    Decoders.BASE64.decode(tokenConfiguration.getSecret())))
+        Jwts.parser()
+            .decryptWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(tokenConfiguration.getSecret())))
             .build()
-            .parseClaimsJws(token);
+            .parse(token);
     }
 
     public String generateToken(final String username) {
-        Map<String,String> claims = Map.of("username", username);
+        Map<String, String> claims = Map.of("username", username);
         return Jwts.builder()
-                .setClaims(claims)
-                .signWith(Keys.hmacShaKeyFor(
-                        Decoders.BASE64.decode(tokenConfiguration.getSecret())))
-                .compact();
+            .claims(claims)
+            .signWith(Keys.hmacShaKeyFor(
+                Decoders.BASE64.decode(tokenConfiguration.getSecret())))
+            .compact();
     }
 }
