@@ -5,6 +5,6 @@ CREATE TABLE "users" (
     password varchar not null,
     email varchar not null,
     role varchar not null,
-    isLocked boolean default true,
-    isEnabled boolean default false
+    is_locked boolean default true,
+    is_enabled boolean default false
 );
