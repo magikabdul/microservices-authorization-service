@@ -84,6 +84,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.zalando</groupId>
+			<artifactId>logbook-spring-boot-webflux-autoconfigure</artifactId>
+			<version>3.10.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
 			<version>${jjwt.version}</version>

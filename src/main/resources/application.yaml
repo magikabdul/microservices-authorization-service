@@ -22,6 +22,14 @@ spring:
 server:
   port: 4212
 
+logging:
+  level:
+    org.zalando.logbook: trace
+
+logbook:
+  format:
+    style: http
+
 jwt:
   secret: ${tokenSecret}
 
