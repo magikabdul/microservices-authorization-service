@@ -8,6 +8,12 @@ import org.springframework.context.annotation.Configuration;
 @Getter
 public class TokenConfiguration {
 
-    @Value("${jwt.secret}")
+    @Value("${jwt.token.secret}")
     private String secret;
+
+    @Value("${jwt.token.expiration.time}")
+    private String expirationTime;
+
+    @Value("${jwt.token.expiration.refresh}")
+    private String expirationRefresh;
 }

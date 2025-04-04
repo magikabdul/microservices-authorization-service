@@ -31,7 +31,11 @@ logbook:
     style: http
 
 jwt:
-  secret: ${tokenSecret}
+  token:
+    secret: ${tokenSecret}
+    expiration:
+      time: PT15m
+      refresh: PT1h
 
 ---
 
